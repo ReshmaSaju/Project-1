@@ -25,6 +25,7 @@ pipeline {
 
                         // Push Docker image to registry
                         customImage.push()
+                        docker run -itd -p 3000:3000 reshma1215/nginx-web
                     }
                 }
             }
