@@ -8,12 +8,12 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('Simple Node.js Application', () => {
-  it('should return "Hello, AWS Elastic Beanstalk!" on / GET', (done) => {
+  it('should return "Hello World!" on / GET', (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.text).to.equal('Hello, AWS Elastic Beanstalk!');
+        expect(res.text).to.equal('Hello World!');
         done();
       });
   });
