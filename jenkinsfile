@@ -2,31 +2,29 @@ pipeline {
     agent any
 
     environment {
-        // Set environment variables if needed
         DOCKER_REGISTRY_CREDENTIALS = '1f31cc70-1cd6-43c4-859b-d36713966986'
         DOCKER_IMAGE_NAME = 'mydockerimg'
         DOCKER_IMAGE_TAG = 'latest'
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                checkout scm
+                script {
+                    checkout scm
+                }
             }
         }
 
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    // Authenticate with Docker registry
-                    withCredentials([string(credentialsId: env.DOCKER_REGISTRY_CREDENTIALS, variable: 'DOCKER_CREDENTIALS')]) {
-                        docker.withRegistry('', env.DOCKER_CREDENTIALS) {
-                            // Build Docker image
-                            def customImage = docker.build("${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG}")
+                    withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: '']) {
+                        // Build Docker image
+                        def customImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
 
-                            // Push Docker image to registry
-                            customImage.push()
-                        }
+                        // Push Docker image to registry
+                        customImage.push()
                     }
                 }
             }
