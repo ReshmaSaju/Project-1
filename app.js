@@ -1,11 +1,11 @@
 {
-  "name": "aws-beanstalk-nodejs-app",
+  "name": "Hello world-nodejs-app",
   "version": "1.0.0",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "aws-beanstalk-nodejs-app",
+      "name": "Hello world-nodejs-app",
       "version": "1.0.0",
       "dependencies": {
         "express": "^4.17.1"
